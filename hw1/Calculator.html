@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator</title>
+    <style>
+        .page{
+
+            width:360px;
+            margin:auto;
+        }
+        table{
+            background:#333333;
+            border-spacing: 10px;
+            text-align: center;
+            border-radius: 30px;
+        }
+
+        table .btn{
+            width: 60px;
+            background:gray;
+            text-align: center;
+            line-height: 60px;
+            color:#fff;
+            font-size: 1.5em;
+            cursor: pointer;
+            border-radius: 200px;
+            font-weight: bold;
+        }
+        #process{
+            padding:5px;
+            text-align: right;
+            border-radius: 200px;
+            height: 28px;
+            color: #fff;
+        }
+
+        #indicator{
+            padding:5px;
+            text-align: right;
+            border-radius: 200px;
+        }
+        #hour{
+            width: 60px;
+            background:gray;
+            text-align: center;
+            line-height: 60px;
+            color:#fff;
+            font-size: 1.5em;
+            border-radius: 200px;
+            font-weight: bold;
+        }
+
+        #indicator{
+            height: 60px;
+            background:#aaaaaa;
+            color:#fff;
+            font-size: 1.8em;
+            text-align: right;
+            line-height: 40px;
+            padding:10px;
+            box-sizing: border-box;
+        }
+        #process{
+            background: #aaa;
+        }
+        .title{
+            border-radius: 100px;
+            height: 28px;
+            width: 340px;
+            background:#aaaaaa;
+            color:#fff;
+            font-size: 1.8em;
+            text-align: center;
+            line-height: 40px;
+            padding:10px;
+            box-sizing: border-box;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+    <table>
+        <tr>
+            <td class="title">Calculator</td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td colspan="5" id="process"></td>
+        </tr>
+        <tr>
+            <td colspan="5" id="indicator">0</td>
+        </tr>
+        <tr>
+            <td class="btn btnNumber">7</td>
+            <td class="btn btnNumber">8</td>
+            <td class="btn btnNumber">9</td>
+            <td class="btn btnOperator">/</td>
+            <td class="btn btnCE">CE</td>
+        </tr>
+        <tr>
+            <td class="btn btnNumber">4</td>
+            <td class="btn btnNumber">5</td>
+            <td class="btn btnNumber">6</td>
+            <td class="btn btnOperator">*</td>
+            <td class="btn btnC">C</td>
+        </tr>
+        <tr>
+            <td class="btn btnNumber">1</td>
+            <td class="btn btnNumber">2</td>
+            <td class="btn btnNumber">3</td>
+            <td class="btn btnOperator">-</td>
+            <td rowspan="2" class="btn btnEqual">=</td>
+        </tr>
+        <tr>
+            <td colspan="2" class="btn btnNumber">0</td>
+            <td class="btn btnDot">.</td>
+            <td class="btn btnOperator">+</td>
+        </tr>
+        <tr>
+          <td colspan="5" class="hour" id="hour">&nbsp;</td>
+        </tr>
+    </table>
+</div>
+
+<script type="text/javascript">
+    var operatorStatus= false;
+    var operator="";//operator
+    var result = 0;
+
+    var btnNumber = document.querySelectorAll(".btnNumber");
+    var indicator = document.querySelector("#indicator");
+    var btnOperator = document.querySelectorAll(".btnOperator");
+    var process = document.querySelector("#process");
+    var btnC = document.querySelector(".btnC");
+    var btnCE = document.querySelector(".btnCE");
+    var btnEqual = document.querySelector(".btnEqual");
+    var btnDot = document.querySelector(".btnDot");
+    btnNumber.forEach(function (element) { //btnNumber's click event
+
+        element.onclick = function (e) { //variable not used
+            
+            if (indicator.textContent == "0" || operatorStatus)
+                indicator.textContent = "";
+            //console.log(indicator.textContent);
+            //console.log(this.textContent)
+            indicator.textContent += this.textContent;
+            operatorStatus = false;
+        }
+        //console.log(element)
+    });
+    btnOperator.forEach(function (element) {
+        element.onclick = function (e) {
+           operatorStatus = true;
+           var newOperator = this.textContent;
+           process.textContent = process.textContent+" "+indicator.textContent+" "+newOperator;
+           switch (operator) {
+
+               case "+":indicator.textContent = (result + Number(indicator.textContent));
+                    break;
+               case "-":indicator.textContent = (result - Number(indicator.textContent));
+                   break;
+               case "*":indicator.textContent = (result * Number(indicator.textContent));
+                   break;
+               case "/":indicator.textContent = (result / Number(indicator.textContent));
+                   break;
+
+           }
+           result = Number(indicator.textContent);
+           operator = newOperator;
+
+        }
+    });
+    btnC.onclick=function (e) {
+        indicator.textContent = "0";
+    }
+    btnCE.onclick = function (e) {
+        indicator.textContent = "0";
+        process.textContent = "";
+        result = 0;
+        operator = "";
+    }
+    btnEqual.onclick = function (e) {
+        process.textContent = "";
+        operatorStatus = true;
+
+        switch (operator) {
+
+            case "+":indicator.textContent = (result + Number(indicator.textContent));
+                break;
+            case "-":indicator.textContent = (result - Number(indicator.textContent));
+                break;
+            case "*":indicator.textContent = (result * Number(indicator.textContent));
+                break;
+            case "/":indicator.textContent = (result / Number(indicator.textContent));
+                break;
+        }
+        result = Number(indicator.textContent);
+        indicator.textContent = result;
+        result = 0;
+        operator = "";
+    }
+    btnDot.onclick = function(e){
+        if(!operatorStatus && !indicator.textContent.includes("."))
+        {
+            indicator.textContent += ".";
+        }
+        else if (operatorStatus)
+        {
+            indicator.textContent = "0";
+        }
+
+        if(!indicator.textContent.includes("."))
+        {
+            indicator.textContent += ".";
+        }
+        operatorStatus = false ;
+    }
+    //////////////////////////////
+    function getHour()
+    {
+        var now = new Date();
+        return now.toLocaleTimeString();
+    }
+
+    function showHour() {
+        var hour = document.getElementById("hour");
+        hour.innerHTML = getHour();
+    }
+    showHour();
+    setInterval("showHour()", 1000);
+</script>
+
+</body>
+</html>
