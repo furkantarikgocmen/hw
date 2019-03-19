@@ -94,30 +94,30 @@
             <td colspan="5" id="indicator">0</td>
         </tr>
         <tr>
-            <td class="btn btnNumber">7</td>
-            <td class="btn btnNumber">8</td>
-            <td class="btn btnNumber">9</td>
-            <td class="btn btnOperator">/</td>
-            <td class="btn btnCE">CE</td>
+            <td class="btn btnNumber" onclick="ekle(7)">7</td>
+            <td class="btn btnNumber" onclick="ekle(8)">8</td>
+            <td class="btn btnNumber" onclick="ekle(9)">9</td>
+            <td class="btn btnOperator" onclick="boldur()">/</td>
+            <td class="btn btnCE" onclick="ce()">CE</td>
         </tr>
         <tr>
-            <td class="btn btnNumber">4</td>
-            <td class="btn btnNumber">5</td>
-            <td class="btn btnNumber">6</td>
-            <td class="btn btnOperator">*</td>
-            <td class="btn btnC">C</td>
+            <td class="btn btnNumber" onclick="ekle(4)">4</td>
+            <td class="btn btnNumber" onclick="ekle(5)">5</td>
+            <td class="btn btnNumber" onclick="ekle(6)">6</td>
+            <td class="btn btnOperator" onclick="carp()">*</td>
+            <td class="btn btnC" onclick="temizle()">C</td>
         </tr>
         <tr>
-            <td class="btn btnNumber">1</td>
-            <td class="btn btnNumber">2</td>
-            <td class="btn btnNumber">3</td>
-            <td class="btn btnOperator">-</td>
-            <td rowspan="2" class="btn btnEqual">=</td>
+            <td class="btn btnNumber" onclick="ekle(1)">1</td>
+            <td class="btn btnNumber" onclick="ekle(2)">2</td>
+            <td class="btn btnNumber" onclick="ekle(3)">3</td>
+            <td class="btn btnOperator" onclick="cikar()">-</td>
+            <td rowspan="2" class="btn btnEqual" onclick="esittir()">=</td>
         </tr>
         <tr>
-            <td colspan="2" class="btn btnNumber">0</td>
+            <td colspan="2" class="btn btnNumber" onclick="ekle(0)">0</td>
             <td class="btn btnDot">.</td>
-            <td class="btn btnOperator">+</td>
+            <td class="btn btnOperator" onclick="topla()">+</td>
         </tr>
         <tr>
           <td colspan="5" class="hour" id="hour">&nbsp;</td>
@@ -126,98 +126,163 @@
 </div>
 
 <script type="text/javascript">
-    var operatorStatus= false;
-    var operator="";//operator
-    var result = 0;
 
-    var btnNumber = document.querySelectorAll(".btnNumber");
     var indicator = document.querySelector("#indicator");
-    var btnOperator = document.querySelectorAll(".btnOperator");
     var process = document.querySelector("#process");
-    var btnC = document.querySelector(".btnC");
-    var btnCE = document.querySelector(".btnCE");
-    var btnEqual = document.querySelector(".btnEqual");
-    var btnDot = document.querySelector(".btnDot");
-    btnNumber.forEach(function (element) { //btnNumber's click event
 
-        element.onclick = function (e) { //variable not used
-            
-            if (indicator.textContent == "0" || operatorStatus)
-                indicator.textContent = "";
-            //console.log(indicator.textContent);
-            //console.log(this.textContent)
-            indicator.textContent += this.textContent;
-            operatorStatus = false;
-        }
-        //console.log(element)
-    });
-    btnOperator.forEach(function (element) {
-        element.onclick = function (e) {
-           operatorStatus = true;
-           var newOperator = this.textContent;
-           process.textContent = process.textContent+" "+indicator.textContent+" "+newOperator;
-           switch (operator) {
+    var sonuc=0;
+    var toplam;
+    var cikan;
+    var carpim;
+    var bolum;
+    var operator;
+    var durum = false;
 
-               case "+":indicator.textContent = (result + Number(indicator.textContent));
-                    break;
-               case "-":indicator.textContent = (result - Number(indicator.textContent));
-                   break;
-               case "*":indicator.textContent = (result * Number(indicator.textContent));
-                   break;
-               case "/":indicator.textContent = (result / Number(indicator.textContent));
-                   break;
-
-           }
-           result = Number(indicator.textContent);
-           operator = newOperator;
-
-        }
-    });
-    btnC.onclick=function (e) {
-        indicator.textContent = "0";
+    function ce() {
+        indicator.textContent = null;
+        process.textContent = null;
+        sonuc = 0;
+        operator = null;
     }
-    btnCE.onclick = function (e) {
-        indicator.textContent = "0";
-        process.textContent = "";
-        result = 0;
-        operator = "";
-    }
-    btnEqual.onclick = function (e) {
-        process.textContent = "";
-        operatorStatus = true;
 
+    function temizle() {
+        indicator.textContent = null;
+    }
+
+    function ekle(sayi) {
+        if(indicator.textContent == 0)
+            indicator.textContent = null;
+        indicator.textContent += sayi;
+    }
+
+    function boldur(){
+        if(durum == false)
+        {
+            bolum = indicator.textContent;
+            sonuc = bolum;
+            indicator.textContent = null;
+            durum = true;
+            console.log(sonuc);
+        }
+        else if(durum == true)
+        {
+            bolum = indicator.textContent;
+            sonuc = sonuc / bolum;
+            console.log(sonuc);
+            process.textContent += bolum +"/";
+            operator = "/";
+            indicator.textContent = null;
+        }
+    }
+
+
+    function cikar() {
+        if(durum == false)
+        {
+            cikan = indicator.textContent;
+            sonuc = cikan;
+            indicator.textContent = null;
+            durum = true;
+            console.log(sonuc);
+        }
+        else if(durum == true)
+        {
+            cikan = Number(indicator.textContent);
+            indicator.textContent = null;
+            sonuc = sonuc - cikan;
+            console.log(sonuc);
+            process.textContent += cikan +"-";
+            operator = "-";
+        }
+    }
+
+    function topla()
+    {
+        toplam = Number(indicator.textContent);
+        indicator.textContent = null;
+        if(sonuc == null)
+        {
+            sonuc = 0;
+        }
+        sonuc + toplam;
+        console.log(sonuc);
+        process.textContent += toplam +"+";
+        operator = "+";
+    }
+
+    function carp() {
+        carpim = Number(indicator.textContent);
+        indicator.textContent = null;
+        if(sonuc == null)
+        {
+            sonuc = 1;
+        }
+        sonuc - carpim;
+        console.log(sonuc);
+        process.textContent += carpim +"*";
+        operator = "*";
+    }
+    /*function bol() {
+        bolum = Number(indicator.textContent);
+        indicator.textContent = null;
+        if(sonuc == 0)
+        {
+            sonuc = bolum;
+        }
+        sonuc = sonuc / bolum;
+        console.log(sonuc);
+        process.textContent += bolum +"/";
+        operator = "/";
+    }*/
+
+    function esittir(){
+
+        indicator.textContent = sonuc;
+
+        /*switch (operator) {
+            case "+":
+                topla();
+                process.textContent = null;
+                indicator.textContent = sonuc;
+                break;
+                console.log(Number(process.textContent))
+            case "-":
+                cikar();
+                process.textContent = null;
+                indicator.textContent = sonuc;
+                break;
+                console.log(Number(process.textContent))
+            case "*":
+                carp();
+                process.textContent = null;
+                indicator.textContent = sonuc;
+                break;
+                console.log(Number(process.textContent))
+            case "/":
+                bol();
+                process.textContent = null;
+                indicator.textContent = sonuc;
+                break;
+            }*/
+/*
         switch (operator) {
-
-            case "+":indicator.textContent = (result + Number(indicator.textContent));
+            case "+":indicator.textContent = (sonuc + Number(indicator.textContent));
                 break;
-            case "-":indicator.textContent = (result - Number(indicator.textContent));
+            case "-":indicator.textContent = (sonuc - Number(indicator.textContent));
                 break;
-            case "*":indicator.textContent = (result * Number(indicator.textContent));
+            case "*":indicator.textContent = (sonuc * Number(indicator.textContent));
                 break;
-            case "/":indicator.textContent = (result / Number(indicator.textContent));
+            case "/":indicator.textContent = (sonuc / Number(indicator.textContent));
                 break;
         }
-        result = Number(indicator.textContent);
-        indicator.textContent = result;
-        result = 0;
+
+        sonuc = Number(indicator.textContent);
+        indicator.textContent = sonuc;
+        sonuc = 0;
         operator = "";
+*/
     }
-    btnDot.onclick = function(e){
-        if(!operatorStatus && !indicator.textContent.includes("."))
-        {
-            indicator.textContent += ".";
-        }
-        else if (operatorStatus)
-        {
-            indicator.textContent = "0";
-        }
 
-        if(!indicator.textContent.includes("."))
-        {
-            indicator.textContent += ".";
-        }
-        operatorStatus = false ;
-    }
     //////////////////////////////
     function getHour()
     {
