@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fetch API</title>
+</head>
+<body>
+<div class="govde">
+    <h1>FETCH API</h1>
+
+    <button id="button1"></button>
+    <button id="button2"></button>
+    <button id="button3"></button>
+    <hr>
+    <div id="output">
+        its Here
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+
+    document.querySelector("#button1").addEventListener("click",getAPI);
+
+    /*function getAPI(){
+        fetch("http://oguzhaninan.com/restful/verilistele.php")
+            .then(response => response.json())
+            .then(kullanici => {
+                var output = "<ul>";
+                kullanici.forEach(function(kullanici) {
+
+                    output +=  '<li>Kullanıcı Adı : ${kullanici.kullanici_adi}</li>';
+
+                })
+                document.getElementById("output").innerHTML += output;
+        });
+    }*/
+</script>
+</html>
