@@ -129,158 +129,97 @@
 
     var indicator = document.querySelector("#indicator");
     var process = document.querySelector("#process");
+    var ilkislem = true;
+    //var sonislem = true;
+    var sonOperator;
 
-    var sonuc=0;
-    var toplam;
-    var cikan;
-    var carpim;
-    var bolum;
-    var operator;
-    var durum = false;
+    function topla(){
+        if(ilkislem == true)
+        {
+            process.textContent = process.textContent + indicator.textContent + "+";
+            ilkislem = false;
+            indicator.textContent = null;
+            sonOperator = "+";
+        }
+        else
+        {
+            process.textContent = process.textContent + indicator.textContent + "+";
+            indicator.textContent = null;
+            sonOperator = "+";
+        }
+    }
+    function cikar() {
+        if(ilkislem == true)
+        {
+            process.textContent = process.textContent + indicator.textContent + "-";
+            ilkislem = false;
+            indicator.textContent = null;
+            sonOperator = "-";
+        }
+        else
+        {
+            process.textContent = process.textContent + indicator.textContent + "-";
+            indicator.textContent = null;
+            sonOperator = "-";
+        }
+    }
+    function carp(){
+        if(ilkislem == true)
+        {
+            process.textContent = process.textContent + indicator.textContent + "*";
+            ilkislem = false;
+            indicator.textContent = null;
+            sonOperator = "*";
+        }
+        else
+        {
+            process.textContent = process.textContent + indicator.textContent + "*";
+            indicator.textContent = null;
+            sonOperator = "*";
+        }
+    }
+    function boldur() {
+        if(ilkislem == true)
+        {
+            process.textContent = process.textContent + indicator.textContent + "/";
+            ilkislem = false;
+            indicator.textContent = null;
+            sonOperator = "/";
+        }
+        else
+        {
+            process.textContent = process.textContent + indicator.textContent + "/";
+            indicator.textContent = null;
+            sonOperator = "/";
+        }
+    }
+
+    function esittir() {
+        switch (sonOperator) {
+            case "+" : process.textContent = process.textContent + indicator.textContent;break;
+            case "-" : process.textContent = process.textContent + indicator.textContent;break;
+            case "*" : process.textContent = process.textContent + indicator.textContent;break;
+            case "/" : process.textContent = process.textContent + indicator.textContent;break;
+        }
+        console.log("Yapılan İşlem : "+process.textContent);
+        console.log(eval(process.textContent));
+        indicator.textContent = eval(process.textContent);
+        process.textContent = null;
+    }
+    function ekle(sayi) {
+        if(indicator.textContent == 0)
+            indicator.textContent = null;
+        indicator.textContent +=sayi;
+    }
 
     function ce() {
         indicator.textContent = null;
         process.textContent = null;
-        sonuc = 0;
-        operator = null;
+        sonOperator = null;
+        ilkislem = true;
     }
-
     function temizle() {
         indicator.textContent = null;
-    }
-
-    function ekle(sayi) {
-        if(indicator.textContent == 0)
-            indicator.textContent = null;
-        indicator.textContent += sayi;
-    }
-
-    function boldur(){
-        if(durum == false)
-        {
-            bolum = indicator.textContent;
-            sonuc = bolum;
-            indicator.textContent = null;
-            durum = true;
-            console.log(sonuc);
-        }
-        else if(durum == true)
-        {
-            bolum = indicator.textContent;
-            sonuc = sonuc / bolum;
-            console.log(sonuc);
-            process.textContent += bolum +"/";
-            operator = "/";
-            indicator.textContent = null;
-        }
-    }
-
-
-    function cikar() {
-        if(durum == false)
-        {
-            cikan = indicator.textContent;
-            sonuc = cikan;
-            indicator.textContent = null;
-            durum = true;
-            console.log(sonuc);
-        }
-        else if(durum == true)
-        {
-            cikan = Number(indicator.textContent);
-            indicator.textContent = null;
-            sonuc = sonuc - cikan;
-            console.log(sonuc);
-            process.textContent += cikan +"-";
-            operator = "-";
-        }
-    }
-
-    function topla()
-    {
-        toplam = Number(indicator.textContent);
-        indicator.textContent = null;
-        if(sonuc == null)
-        {
-            sonuc = 0;
-        }
-        sonuc + toplam;
-        console.log(sonuc);
-        process.textContent += toplam +"+";
-        operator = "+";
-    }
-
-    function carp() {
-        carpim = Number(indicator.textContent);
-        indicator.textContent = null;
-        if(sonuc == null)
-        {
-            sonuc = 1;
-        }
-        sonuc - carpim;
-        console.log(sonuc);
-        process.textContent += carpim +"*";
-        operator = "*";
-    }
-    /*function bol() {
-        bolum = Number(indicator.textContent);
-        indicator.textContent = null;
-        if(sonuc == 0)
-        {
-            sonuc = bolum;
-        }
-        sonuc = sonuc / bolum;
-        console.log(sonuc);
-        process.textContent += bolum +"/";
-        operator = "/";
-    }*/
-
-    function esittir(){
-
-        indicator.textContent = sonuc;
-
-        /*switch (operator) {
-            case "+":
-                topla();
-                process.textContent = null;
-                indicator.textContent = sonuc;
-                break;
-                console.log(Number(process.textContent))
-            case "-":
-                cikar();
-                process.textContent = null;
-                indicator.textContent = sonuc;
-                break;
-                console.log(Number(process.textContent))
-            case "*":
-                carp();
-                process.textContent = null;
-                indicator.textContent = sonuc;
-                break;
-                console.log(Number(process.textContent))
-            case "/":
-                bol();
-                process.textContent = null;
-                indicator.textContent = sonuc;
-                break;
-            }*/
-/*
-        switch (operator) {
-            case "+":indicator.textContent = (sonuc + Number(indicator.textContent));
-                break;
-            case "-":indicator.textContent = (sonuc - Number(indicator.textContent));
-                break;
-            case "*":indicator.textContent = (sonuc * Number(indicator.textContent));
-                break;
-            case "/":indicator.textContent = (sonuc / Number(indicator.textContent));
-                break;
-        }
-
-        sonuc = Number(indicator.textContent);
-        indicator.textContent = sonuc;
-        sonuc = 0;
-        operator = "";
-*/
     }
 
     //////////////////////////////
