@@ -154,12 +154,7 @@
     }
 
     function result() {
-        switch (lastOperator) {
-            case "+" : process.textContent = process.textContent + indicator.textContent;break;
-            case "-" : process.textContent = process.textContent + indicator.textContent;break;
-            case "*" : process.textContent = process.textContent + indicator.textContent;break;
-            case "/" : process.textContent = process.textContent + indicator.textContent;break;
-        }
+        process.textContent = process.textContent + indicator.textContent;
         console.log("Action : "+process.textContent);
         console.log(eval(process.textContent));
         indicator.textContent = eval(process.textContent);
