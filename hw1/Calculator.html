@@ -94,30 +94,30 @@
             <td colspan="5" id="indicator">0</td>
         </tr>
         <tr>
-            <td class="btn btnNumber" onclick="ekle(7)">7</td>
-            <td class="btn btnNumber" onclick="ekle(8)">8</td>
-            <td class="btn btnNumber" onclick="ekle(9)">9</td>
-            <td class="btn btnOperator" onclick="boldur()">/</td>
+            <td class="btn btnNumber" onclick="adder(7)">7</td>
+            <td class="btn btnNumber" onclick="adder(8)">8</td>
+            <td class="btn btnNumber" onclick="adder(9)">9</td>
+            <td class="btn btnOperator" onclick="division()">/</td>
             <td class="btn btnCE" onclick="ce()">CE</td>
         </tr>
         <tr>
-            <td class="btn btnNumber" onclick="ekle(4)">4</td>
-            <td class="btn btnNumber" onclick="ekle(5)">5</td>
-            <td class="btn btnNumber" onclick="ekle(6)">6</td>
-            <td class="btn btnOperator" onclick="carp()">*</td>
-            <td class="btn btnC" onclick="temizle()">C</td>
+            <td class="btn btnNumber" onclick="adder(4)">4</td>
+            <td class="btn btnNumber" onclick="adder(5)">5</td>
+            <td class="btn btnNumber" onclick="adder(6)">6</td>
+            <td class="btn btnOperator" onclick="multiplication()">X</td>
+            <td class="btn btnC" onclick="c()">C</td>
         </tr>
         <tr>
-            <td class="btn btnNumber" onclick="ekle(1)">1</td>
-            <td class="btn btnNumber" onclick="ekle(2)">2</td>
-            <td class="btn btnNumber" onclick="ekle(3)">3</td>
-            <td class="btn btnOperator" onclick="cikar()">-</td>
-            <td rowspan="2" class="btn btnEqual" onclick="esittir()">=</td>
+            <td class="btn btnNumber" onclick="adder(1)">1</td>
+            <td class="btn btnNumber" onclick="adder(2)">2</td>
+            <td class="btn btnNumber" onclick="adder(3)">3</td>
+            <td class="btn btnOperator" onclick="extraction()">-</td>
+            <td rowspan="2" class="btn btnEqual" onclick="result()">=</td>
         </tr>
         <tr>
-            <td colspan="2" class="btn btnNumber" onclick="ekle(0)">0</td>
-            <td class="btn btnDot">.</td>
-            <td class="btn btnOperator" onclick="topla()">+</td>
+            <td colspan="2" class="btn btnNumber" onclick="adder(0)">0</td>
+            <td class="btn btnDot" onclick="dot()">.</td>
+            <td class="btn btnOperator" onclick="addition()">+</td>
         </tr>
         <tr>
           <td colspan="5" class="hour" id="hour">&nbsp;</td>
@@ -129,96 +129,58 @@
 
     var indicator = document.querySelector("#indicator");
     var process = document.querySelector("#process");
-    var ilkislem = true;
-    //var sonislem = true;
-    var sonOperator;
+    // firstProcess = true;
+    var lastOperator;
 
-    function topla(){
-        if(ilkislem == true)
-        {
-            process.textContent = process.textContent + indicator.textContent + "+";
-            ilkislem = false;
-            indicator.textContent = null;
-            sonOperator = "+";
-        }
-        else
-        {
-            process.textContent = process.textContent + indicator.textContent + "+";
-            indicator.textContent = null;
-            sonOperator = "+";
-        }
+    function addition(){
+        process.textContent = process.textContent + indicator.textContent + "+";
+        indicator.textContent = null;
+        lastOperator = "+";
     }
-    function cikar() {
-        if(ilkislem == true)
-        {
-            process.textContent = process.textContent + indicator.textContent + "-";
-            ilkislem = false;
-            indicator.textContent = null;
-            sonOperator = "-";
-        }
-        else
-        {
-            process.textContent = process.textContent + indicator.textContent + "-";
-            indicator.textContent = null;
-            sonOperator = "-";
-        }
+    function extraction() {
+        process.textContent = process.textContent + indicator.textContent + "-";
+        indicator.textContent = null;
+        lastOperator = "-";
     }
-    function carp(){
-        if(ilkislem == true)
-        {
-            process.textContent = process.textContent + indicator.textContent + "*";
-            ilkislem = false;
-            indicator.textContent = null;
-            sonOperator = "*";
-        }
-        else
-        {
-            process.textContent = process.textContent + indicator.textContent + "*";
-            indicator.textContent = null;
-            sonOperator = "*";
-        }
+    function multiplication(){
+        process.textContent = process.textContent + indicator.textContent + "*";
+        indicator.textContent = null;
+        lastOperator = "*";
     }
-    function boldur() {
-        if(ilkislem == true)
-        {
-            process.textContent = process.textContent + indicator.textContent + "/";
-            ilkislem = false;
-            indicator.textContent = null;
-            sonOperator = "/";
-        }
-        else
-        {
-            process.textContent = process.textContent + indicator.textContent + "/";
-            indicator.textContent = null;
-            sonOperator = "/";
-        }
+    function division() {
+        process.textContent = process.textContent + indicator.textContent + "/";
+        indicator.textContent = null;
+        lastOperator = "/";
     }
 
-    function esittir() {
-        switch (sonOperator) {
+    function result() {
+        switch (lastOperator) {
             case "+" : process.textContent = process.textContent + indicator.textContent;break;
             case "-" : process.textContent = process.textContent + indicator.textContent;break;
             case "*" : process.textContent = process.textContent + indicator.textContent;break;
             case "/" : process.textContent = process.textContent + indicator.textContent;break;
         }
-        console.log("Yapılan İşlem : "+process.textContent);
+        console.log("Action : "+process.textContent);
         console.log(eval(process.textContent));
         indicator.textContent = eval(process.textContent);
         process.textContent = null;
     }
-    function ekle(sayi) {
+    function adder(number) {
         if(indicator.textContent == 0)
             indicator.textContent = null;
-        indicator.textContent +=sayi;
+        indicator.textContent +=number;
+    }
+    function dot() {
+        indicator.textContent += ".";
     }
 
     function ce() {
-        indicator.textContent = null;
+        indicator.textContent = 0;
         process.textContent = null;
-        sonOperator = null;
-        ilkislem = true;
+        lastOperator = null;
+        //firstProcess = true;
     }
-    function temizle() {
+    function c() {
         indicator.textContent = null;
     }
 
