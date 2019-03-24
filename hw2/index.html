@@ -5,34 +5,36 @@
     <title>Fetch API</title>
 </head>
 <body>
-<div class="govde">
-    <h1>FETCH API</h1>
-
-    <button id="button1"></button>
-    <button id="button2"></button>
-    <button id="button3"></button>
+<div class="body">
+    <h1>FETCH API Example</h1>
     <hr>
-    <div id="output">
-        its Here
-    </div>
+	
+  <p>
+      <label>User ID:</label>
+      <input type="text" name="textfield" id="user_id">
+  </p>
+  <p>
+    <label>User Name:</label>
+    <input type="text" name="textfield" id="user_name">
+  </p>
+  <p>
+    <label>User Password:</label>
+    <input type="text" name="textfield" id="user_password">
+  </p>
+  <p>
+    <input type="button" name="button" id="button" value="New User" onclick="operation('veriekle')">
+    <input type="button" name="button2" id="button2" value="Search User" onclick="operation('veriara')">
+    <input type="button" name="button3" id="button3" value="Delete User" onclick="operation('verisil')">
+    <input type="button" name="button4" id="button4" value="Update User" onclick="operation('veriguncelle')">
+    <input type="button" name="button5" id="button5" value="Fetch All Users" onclick="getData()">
+  </p>
+	<hr>
+	<div id="output">Results</div>
+	<hr>
+	<h4>Need User ID For Update and Deletion Operations.</h4>
+	<h4>Need User Name For Search Process.</h4>
+	<h4>User Name and User Password Need For New Registration Process.</h4>
 </div>
 </body>
-<script type="text/javascript">
-
-    document.querySelector("#button1").addEventListener("click",getAPI);
-
-    /*function getAPI(){
-        fetch("http://oguzhaninan.com/restful/verilistele.php")
-            .then(response => response.json())
-            .then(kullanici => {
-                var output = "<ul>";
-                kullanici.forEach(function(kullanici) {
-
-                    output +=  '<li>Kullanıcı Adı : ${kullanici.kullanici_adi}</li>';
-
-                })
-                document.getElementById("output").innerHTML += output;
-        });
-    }*/
-</script>
+<script src="application.js"></script>
 </html>
