@@ -4,12 +4,12 @@ var userName = document.querySelector("#user_name");
 var userPassword = document.querySelector("#user_password");
 
 function getData() {
-    fetch("http://localhost/restfulllll/verilistele.php")
+    fetch("http://oguzhaninan.com/restful/verilistele.php")
         .then(function(response) {
             return response.json();
         })
         .then(function(myJson) {
-            console.log(JSON.stringify(myJson));
+            //console.log(JSON.stringify(myJson));
             result.textContent = JSON.stringify(myJson);
         });
 }
@@ -35,14 +35,14 @@ function operation(operation) {
             break;
     }
 
-    fetch('http://localhost/restfulllll/'+operation+'.php', {
+    fetch('http://oguzhaninan.com/restful/'+operation+'.php', {
         method: 'POST',
         headers : new Headers(),
         body : formData
     }).then(function (response) {
         return response.text();
     }).then(function (myJson) {
-        console.log(JSON.stringify(myJson));
+        //console.log(JSON.stringify(myJson));
         result.textContent = JSON.stringify(myJson);
     })
     //formData.clear;
