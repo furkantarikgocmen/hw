@@ -19,9 +19,12 @@ function getData() {
                 col1 = row.insertCell(0);
                 col2 = row.insertCell(1);
                 col3 = row.insertCell(2);
-                col1.innerHTML += myJson['kullanici'][i]['kullanici_id'];
+                /*col1.innerHTML += myJson['kullanici'][i]['kullanici_id'];
                 col2.innerHTML += myJson['kullanici'][i]['kullanici_adi'];
-                col3.innerHTML += myJson['kullanici'][i]['kullanici_sifre'];
+                col3.innerHTML += myJson['kullanici'][i]['kullanici_sifre'];*/
+                col1.innerHTML += myJson.kullanici[i].kullanici_id;
+                col2.innerHTML += myJson.kullanici[i].kullanici_adi;
+                col3.innerHTML += myJson.kullanici[i].kullanici_sifre;
             }
         });
 }
@@ -69,9 +72,12 @@ function operation(operation) {
                     col1 = row.insertCell(0);
                     col2 = row.insertCell(1);
                     col3 = row.insertCell(2);
-                    col1.innerHTML += myJson['kullanici'][i]['kullanici_id'];
+                    /*col1.innerHTML += myJson['kullanici'][i]['kullanici_id'];
                     col2.innerHTML += myJson['kullanici'][i]['kullanici_adi'];
-                    col3.innerHTML += myJson['kullanici'][i]['kullanici_sifre'];
+                    col3.innerHTML += myJson['kullanici'][i]['kullanici_sifre'];*/
+                    col1.innerHTML += myJson.kullanici[i].kullanici_id;
+                    col2.innerHTML += myJson.kullanici[i].kullanici_adi;
+                    col3.innerHTML += myJson.kullanici[i].kullanici_sifre;
                     clearTxt();
                 }
             }
