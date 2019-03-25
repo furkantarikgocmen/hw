@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Fetch API</title>
+    <style>
+        table, td {
+            border: 1px solid black;
+        }
+    </style>
 </head>
 <body>
 <div class="body">
@@ -29,7 +34,13 @@
     <input type="button" name="button5" id="button5" value="Fetch All Users" onclick="getData()">
   </p>
 	<hr>
-	<div id="output">Results</div>
+    <table id="table">
+        <tr>
+            <td>User ID</td>
+            <td>User Name</td>
+            <td>User Password</td>
+        </tr>
+    </table>
 	<hr>
 	<h4>Need User ID For Update and Deletion Operations.</h4>
 	<h4>Need User Name For Search Process.</h4>

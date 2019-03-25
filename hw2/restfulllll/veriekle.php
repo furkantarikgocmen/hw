@@ -17,26 +17,32 @@ if(isset($kullanici_adi) && isset($kullanici_sifre)  && $kullanici_adi != "" && 
 	{
 		$response["success"] = 1;
 		$response["message"] = "successfully";
-		echo(json_encode($response));
+		//echo(json_encode($response));
 	}
 	
 	else
 	{
 		$response["success"] = 0;
 		$response["message"] = "Hata Oluştu";
-		echo(json_encode($response));
+		//echo(json_encode($response));
 	}
 }
-if($kullanici_adi == "")
+/*if($kullanici_adi == "")
 {
 	$response["success"] = 0;
 	$response["message"] = "Kullanici Adı Gerekli";
-	echo(json_encode($response));
+	//echo(json_encode($response));
 }
-if($kullanici_sifre == "")
+else if($kullanici_sifre == "")
 {
 	$response["success"] = 0;
 	$response["message"] = "Kullanıcı Şifresi gerekli";
-	echo(json_encode($response));
+	//echo(json_encode($response));
+}*/
+if($kullanici_sifre == "" || $kullanici_adi == "")
+{
+	$response["success"] = 0;
+	$response["message"] = "Girilen Bilgiler Eksikti";
 }
+echo(json_encode($response));
 ?>

@@ -14,19 +14,20 @@ if(isset($kullanici_id) && $kullanici_id != "")
 	{
 		$response["success"] = 1;
 		$response["message"] = "successfully";
-		echo(json_encode($response));
+		//echo(json_encode($response));
 	}
 	else
 	{
 		$response["success"] = 0;
 		$response["message"] = "Kullanici Bulunamadı";
-		echo(json_encode($response));
+		//echo(json_encode($response));
 	}
 }
 if($kullanici_id == "")
 {
 	$response["success"] = 0;
 	$response["message"] = "Kullanici ID Gerekli";
-	echo(json_encode($response));
+	//echo(json_encode($response));
 }
+echo(json_encode($response));
 ?>

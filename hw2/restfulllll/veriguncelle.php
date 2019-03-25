@@ -19,34 +19,40 @@ if(isset($kullanici_id) && $kullanici_id != "" && isset($kullanici_adi) && $kull
 	{
 		$response["success"] = 1;
 		$response["message"] = "Successfully";
-		echo(json_encode($response));
+		//echo(json_encode($response));
 	}
 	else
 	{
 		$response["success"] = 0;
 		$response["message"] = "Kullanıcı Bulunamadı";
-		echo(json_encode($response));
+		//echo(json_encode($response));
 	}
 }
 
-if($kullanici_id == "")
+/*if($kullanici_id == "")
 {
 	$response["success"] = 0;
 	$response["message"] = "Kullanici ID Gerekli";
-	echo(json_encode($response));
+	//echo(json_encode($response));
 }
 
-if($kullanici_adi == "")
+else if($kullanici_adi == "")
 {
 	$response["success"] = 0;
 	$response["message"] = "Kullanici Adı Gerekli";
-	echo(json_encode($response));
+	//echo(json_encode($response));
 }
 
-if($kullanici_sifre == "")
+else if($kullanici_sifre == "")
 {
 	$response["success"] = 0;
 	$response["message"] = "Kullanıcı Şifre gerekli";
-	echo(json_encode($response));
+	//echo(json_encode($response));
+}*/
+if($kullanici_id == "" || $kullanici_adi == "" || $kullanici_sifre == "" )
+{
+	$response["success"] = 0;
+	$response["message"] = "Girilen Bilgiler Eksik";
 }
+echo(json_encode($response));
 ?>

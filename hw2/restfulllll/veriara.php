@@ -33,7 +33,7 @@ if(isset($kullanici_adi) && $kullanici_adi != "")
 		
 		$response["success"] = 1;
 		
-		echo json_encode($response);
+		//echo json_encode($response);
 		
 	}
 	
@@ -41,7 +41,7 @@ if(isset($kullanici_adi) && $kullanici_adi != "")
 	{
 		$response["success"] = 0;
 		$response["message"] = "Kullanıcı Bulunamadı";
-		echo(json_encode($response));
+		//echo(json_encode($response));
 	}
 }
 
@@ -49,6 +49,7 @@ if($kullanici_adi == "")
 {
 	$response["success"] = 0;
 	$response["message"] = "Kullanıcı Adı Gerekli";
-	echo(json_encode($response));
+	//echo(json_encode($response));
 }
+echo(json_encode($response));
 ?>
