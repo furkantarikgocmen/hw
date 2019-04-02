@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Websocket</title>
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io.connect('http://localhost:3000');
+
+        socket.on('connection', (data) =>{
+            document.getElementById('users').innerHTML += `<li> <b>${data.name}</b> Bağlandı</li>`;
+        });
+        socket.on('disconnect', (data) =>{
+            //document.getElementById('users').innerHTML += `<li> <b>${data.name}</b> Ayrıldı</li>`;
+            document.getElementById('users').innerHTML += `<li> Ayrıldı</li>`;
+        });
+        socket.on('message', (data) =>{
+            document.getElementById('users').innerHTML += `<li> <b>${data.name} : </b> ${data.message}</li>`;
+        });
+
+        function baglandi() {
+            document.getElementById('users').innerHTML += '<li><b>Bağlandınız</b></li>';
+            var user = document.getElementById('name').value;
+            socket.emit('connection',{name : user});
+        }
+
+        function gonder(){
+            var message = document.getElementById('message').value;
+            var user = document.getElementById('name').value;
+            socket.emit('message',{message : message, name : user});
+            document.getElementById('users').innerHTML += `<li> <b>${user} : </b>${message}</li>`;
+        }
+
+    </script>
+</head>
+<body>
+<input type="text" id="name">
+<button onclick="baglandi()">Bağlan</button>
+</br>
+<input type="text" id="message">
+<button onclick="gonder()">Gönder</button>
+</br>
+<ul id="users"></ul>
+</body>
+</html>
