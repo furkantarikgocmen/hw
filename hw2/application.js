@@ -106,4 +106,5 @@ function clearTxt() {
     userId.value = "";
     userName.value = "";
     userPassword.value = "";
+
 }
