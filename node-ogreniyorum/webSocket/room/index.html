@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Websocket</title>
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io.connect('http://localhost:3000');
+
+        function joinRoom(){
+            var roomName = document.getElementById('roomName').value;
+            socket.emit('joinRoom', {name : roomName})
+
+            // document.getElementById('users').innerHTML += `<li> <b>${user} : </b>${message}</li>`;
+        };
+        socket.on('new join', (data) => {
+            document.getElementById('userCount').textContent = `Bu odada ${data.count} Kişi Var`;
+
+        });
+        socket.on('log', (data) => {
+            console.log(data);
+        })
+
+    </script>
+</head>
+<body>
+<input id="roomName" />
+<button id="joinRoom" onclick="joinRoom()">Join</button>
+<div id="userCount"></div>
+</body>
+</html>
