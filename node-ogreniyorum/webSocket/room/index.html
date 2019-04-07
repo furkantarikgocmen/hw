@@ -4,21 +4,36 @@
     <meta charset="UTF-8">
     <title>Websocket</title>
     <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <style>
+        #leaveRoom{
+            display: none;
+        }
+    </style>
     <script>
         const socket = io.connect('http://localhost:3000');
 
         function joinRoom(){
             var roomName = document.getElementById('roomName').value;
             socket.emit('joinRoom', {name : roomName})
+            document.getElementById('roomName').disabled = true;
+            document.getElementById('joinRoom').disabled = true;
+            document.getElementById('leaveRoom').style.display = "block";
 
-            // document.getElementById('users').innerHTML += `<li> <b>${user} : </b>${message}</li>`;
-        };
+        }
+        function leaveRoom (){
+            var roomName = document.getElementById('roomName').value;
+            socket.emit('leaveRoom',{name : roomName});
+        }
         socket.on('new join', (data) => {
             document.getElementById('userCount').textContent = `Bu odada ${data.count} Kişi Var`;
 
         });
         socket.on('log', (data) => {
             console.log(data);
+        });
+        socket.on('LeavedRoom', (data) => {
+            document.getElementById('userCount').textContent = `Bu odada ${data.count} Kişi Var`;
+
         })
 
     </script>
@@ -26,6 +41,7 @@
 <body>
 <input id="roomName" />
 <button id="joinRoom" onclick="joinRoom()">Join</button>
+<button id="leaveRoom" onclick="leaveRoom()">Leave</button>
 <div id="userCount"></div>
 </body>
 </html>
